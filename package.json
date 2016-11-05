@@ -1,5 +1,5 @@
 {
-  "name": "koa2 Example",
+  "name": "koa2Example",
   "version": "0.0.1",
   "description": "Koa 2 example with async",
   "main": "start.js",
