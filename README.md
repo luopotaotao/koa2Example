@@ -22,6 +22,8 @@
 * template render -> routers/index.js routers/nunjuncks.js
 * JSON response -> routers/json.js
 * static resource -> routers/resource.js
+
+
 ***
 ## koa2 web项目模板
 ### 使用以下模块
