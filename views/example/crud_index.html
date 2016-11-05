@@ -1,0 +1,57 @@
+{% extends "../layout.html" %}}
+
+{% block body %}
+<form method="post">
+    <p>name: <input name="name"></p>
+    <p>gender: <input name="gender" type="radio" value="1">公<input name="gender" type="radio" value="0">母</p>
+    <p>birth: <input name="birth"></p>
+    <p><input type="submit" value="do post"></p>
+</form>
+<form id="put_form" method="put">
+    <p>id: <input name="id" id="put_id"></p>
+    <p>name: <input name="name"></p>
+    <p>gender: <input name="gender" type="radio" value="1">公<input name="gender" type="radio" value="0">母</p>
+    <p>birth: <input name="birth"></p>
+    <p><input id="put_submit" type="button" value="do put"></p>
+</form>
+<form method="delete">
+    <p>id: <input name="id" id="del_id"></p>
+    <p><input id="del_submit" type="button" value="do delete"></p>
+</form>
+
+<ul>
+    {% for pet in pets %}
+    <li>{{pet.id}}: {{pet.name}}</li>
+    {% endfor %}
+</ul>
+<script type="text/javascript">
+    $(function () {
+        $('#put_submit').on('click', doPut);
+        $('#del_submit').on('click', doDel);
+        function doPut() {
+            $.ajax({
+                url: './pets/' + $('#put_id').val(),
+                type: 'put',
+                dataType: 'json',
+                data: $('#put_form').serialize()
+            }).done(function (ret) {
+                alert(JSON.stringify(ret));
+            }).fail(function () {
+                alert('err');
+            });
+        }
+        function doDel() {
+            $.ajax({
+                url: './pets/' + $('#del_id').val(),
+                type: 'delete',
+                dataType: 'json',
+                data: $('#put_form').serialize()
+            }).done(function (ret) {
+                alert(JSON.stringify(ret));
+            }).fail(function () {
+                alert('err');
+            });
+        }
+    });
+</script>
+{% endblock %}
