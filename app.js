@@ -3,15 +3,19 @@
  */
 'use strict'
 const Koa = require('koa');
+
+//third party middleware 第三方中间件
 const router = require('koa-router')();
 const bodyParser = require('koa-bodyparser')();
 const serve = require('koa-static2');
 const session = require('koa-session-minimal');
+
+//customed middleware 自定义中间件
 const res_json = require('./middleware/res_json');
 const nunjacks_render = require('./middleware/nunjacks_render');
 const global_err = require('./middleware/global_err');
 
-
+//routers 路由
 var index = require('./routers/index.js');
 var form = require('./routers/form.js');
 var hello = require('./routers/hello.js');
@@ -23,21 +27,21 @@ var err = require('./routers/err.js');
 
 const app = new Koa();
 
-//日志输出
+// logger 日志输出
 app.use(async(ctx,next)=>{
     console.log(`Process ${ctx.request.method}:${ctx.request.url}...`);
     await next();
 });
 
-//静态资源
+//static resource 静态资源
 app.use(serve('static',`${__dirname}/resources`));
 
-//session设置
+//session config session设置
 app.use(session({
     key:'SESSIONID'
 }));
 
-//form表单解析
+//form parser form表单解析
 app.use(bodyParser);
 app.use(nunjacks_render(`${__dirname}/views`));
 app.use(global_err());

@@ -34,20 +34,8 @@ var Pet = sequelize.define('pet', {
     version: Sequelize.BIGINT
 });
 
-// Pet.sync({force:true});
-//
-// (async () => {
-//     var dog = await Pet.create({
-//         id: 'd-' + now,
-//         name: 'Odie',
-//         gender: false,
-//         birth: '2008-08-08',
-//         createdAt: now,
-//         updatedAt: now,
-//         version: 0
-//     });
-//     console.log('created: ' + JSON.stringify(dog));
-// })();
+Pet.sync({force:true});  //TODO remove this if init db is not needed
+
 
 module.exports = {
     Pet:Pet
